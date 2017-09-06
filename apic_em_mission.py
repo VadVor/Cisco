@@ -9,7 +9,7 @@ requests.packages.urllib3.disable_warnings()
 
 # MISSION: Assign the APIC-EM IP address to the CONTROLLER variable
 CONTROLLER = 'devnetapi.cisco.com/sandbox/apic_em'
-proxies = {'http': 'http://f00023085:Werthvfy1@proxy.asb.by:81', 'https': 'http://f00023085:Werthvfy1@proxy.asb.by:81'}
+
 
 # MISSION: Assign your authentication token obtained from Spark's Developer page
 AUTH = 'MjMyYjYxNjItYzU3Yy00MGUwLTgzZGItYWYxYjY2MGYwYTQ4OTUyN2FhODUtYTAz'
@@ -41,7 +41,7 @@ def getTicket():
     header = {"content-type": "application/json"}
 
     # Performs a POST on the specified url to get the service ticket
-    response = requests.post(url, data=json.dumps(payload),proxies=proxies, headers=header, verify=False)
+    response = requests.post(url, data=json.dumps(payload),headers=header, verify=False)
     response.raise_for_status()
 
     print(response)
@@ -75,7 +75,7 @@ def getTopology(ticket):
     header = {"content-type": "application/json", "X-Auth-Token": ticket}
 
     # this statement performs a GET on the specified network device url
-    response = requests.get(url, proxies=proxies,headers=header, verify=False)
+    response = requests.get(url, headers=header, verify=False)
     response.raise_for_status()
 
     # convert data to json format.
@@ -129,7 +129,7 @@ def get_roomID():
               "Authorization": "Bearer " + AUTH}
 
     # this statement performs a GET on the specified network device url
-    response = requests.get(url, proxies=proxies,headers=header, verify=False)
+    response = requests.get(url, headers=header, verify=False)
     response.raise_for_status()
     r_json = response.json()
 
@@ -162,7 +162,7 @@ def post_spark(text, room_id):
     }
     # this statement performs a GET on the specified network device url
     response = requests.post(url, data=json.dumps(
-        payload), proxies=proxies, headers=header, verify=False)
+        payload), headers=header, verify=False)
     response.raise_for_status()
 
     print("\nCheck the Spark Room.  You've just posted a message!")
